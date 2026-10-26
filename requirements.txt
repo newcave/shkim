@@ -1,0 +1,4 @@
+streamlit>=1.47
+supabase>=2.10
+pyyaml>=6.0
+python-dateutil>=2.9

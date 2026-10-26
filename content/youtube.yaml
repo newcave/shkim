@@ -1,0 +1,12 @@
+# 사이드바에 표시할 유튜브 설정. 전부 선택 항목이고, 비면 안내만 표시된다.
+
+# 최신 영상을 자동으로 끌어올 채널 ID (채널 페이지 소스 보기에서 "channelId" 검색).
+# 값을 넣기 전까지는 자동 목록이 생략된다.
+channel_id: "UCxxxxxxxxxxxxxxxxxxxxxx"
+channel_url: ""          # '채널 보기' 링크 (예: https://www.youtube.com/@kwater)
+max_latest: 3            # 자동으로 가져올 최신 영상 수
+
+# 상단에 항상 고정으로 보여줄 추천 영상 (선택). 채널 ID 없이도 이 영상들은 표시된다.
+featured: []
+#  - url: "https://www.youtube.com/watch?v=xxxxxxxxxxx"
+#    title: "K-water AI 정수장 소개"

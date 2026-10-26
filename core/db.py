@@ -138,7 +138,26 @@ class DemoBackend:
             return (today - dt.timedelta(days=days_ago)).isoformat()
 
         # 아래 피드 항목은 실제 공개 논문·기사로 채워져 있다(2026-10 검색). 정리·취사선택은 운영자가.
+        # 맨 앞 3건은 본인이 쓴 Water Co-Scientist 비전 글(운영자 제공).
         self.feed_items = [
+            dict(id=str(uuid.uuid4()), kind="report",
+                 title="왜 Water Co-Scientist인가? — 물리 기반 수리모델과 Agentic AI의 결합",
+                 url="https://shkim101.streamlit.app/?post=feed-001", doi=None, authors="김성훈",
+                 venue="Water Co-Scientist 노트", published_at="2026-10-01", lang="ko",
+                 summary_ko="기후위기로 통계적 패턴만으론 극한 홍수·가뭄 예측이 어렵다. 환경·수리학 수치모델과 HPC 시뮬레이션에 LLM 에이전트를 결합해 가설→시뮬레이션→검증 주기를 단축하는 차세대 연구 파트너.",
+                 tags=["co-scientist", "agentic-ai", "hydrology", "physics-informed"], score=6, is_pinned=True, is_hidden=False),
+            dict(id=str(uuid.uuid4()), kind="report",
+                 title="디지털 트윈 물관리 플랫폼과 AI 에이전트 연동",
+                 url="https://shkim101.streamlit.app/?post=feed-002", doi=None, authors="김성훈",
+                 venue="Water Co-Scientist 노트", published_at="2026-09-01", lang="ko",
+                 summary_ko="디지털트윈 플랫폼에 AI 모델을 탑재해 금강 등 주요 유역의 강우-유출·댐 수위·수질을 실시간 모의하고 최적 의사결정을 지원하는 AI-enabled System·MLOps 고도화.",
+                 tags=["digital-twin", "smart-water", "k-water"], score=5, is_pinned=True, is_hidden=False),
+            dict(id=str(uuid.uuid4()), kind="report",
+                 title="K-water AI연구소에서 AI연구센터까지: 도메인 전문가와 AI의 융합",
+                 url="https://github.com/Kwater-AILab", doi=None, authors="김성훈",
+                 venue="Water Co-Scientist 노트", published_at="2026-08-01", lang="ko",
+                 summary_ko="2021년 AI연구소 출범 이래 사내 AI 경진대회·학회 분과 세미나·오픈소스 GitHub(Kwater-AILab)로 물환경 도메인 연구자가 직접 AI를 다루는 문화를 확산.",
+                 tags=["k-water", "co-scientist"], score=4, is_pinned=False, is_hidden=False),
             dict(id=str(uuid.uuid4()), kind="paper",
                  title="HydroAgent: Closing the Gap Between Frontier LLMs and Human Experts in Hydrologic Model Calibration via Simulator-Grounded RL",
                  url="https://arxiv.org/abs/2605.17792", doi=None,

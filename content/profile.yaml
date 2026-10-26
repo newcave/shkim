@@ -19,7 +19,9 @@ interests:
   - Water Co-Scientist / AI co-scientist
   - Agentic AI · LLM 기반 물관리
   - 디지털 트윈 · 스마트 물관리 플랫폼
-  - 환경·수리학 · 슈퍼컴퓨터/HPC 활용
+  - 물 재난(홍수·가뭄) · 수질 관리 · 인프라 안전 AI
+  - 환경·수리학 · 수치모델링 · 슈퍼컴퓨터/HPC 활용
+  - AI-enabled System · MLOps 구현
 
 # 학력 (이력서)
 education:
@@ -31,6 +33,7 @@ education:
 career:
   - "K-water 연구원 AI연구소장 (2010~현재) · 2025.12 AI연구센터장→소장"
   - "국가전략기술 인공지능 기술조정 위원회 위원 (2024~현재)"
+  - "한국수자원학회 AI응용연구분과위원회 위원장 (2024~현재)"
   - "수자원 디지털트윈플랫폼 구축 및 정보화전략계획 자문위원 (2022~현재)"
   - "국가건설기준센터 공동구 분야 위원 (2021~현재)"
   - "국토안전관리원 국토안전자문위원 · 기반시설/수자원 (2018~현재)"
@@ -45,8 +48,8 @@ career:
 links:
   - label: 이메일
     url: mailto:sunghoonkim@kwater.or.kr
-  # 아래는 공개된 링크가 확인되면 채우세요. 값이 비면 화면에서 생략됩니다.
+  - label: K-water AI Lab (GitHub)
+    url: https://github.com/Kwater-AILab
+  # 공개 링크가 더 확인되면 추가하세요. 값이 비면 화면에서 생략됩니다.
   # - label: Google Scholar
   #   url: https://scholar.google.com/
-  # - label: K-water AI Lab (GitHub)
-  #   url: https://github.com/Kwater-AILab

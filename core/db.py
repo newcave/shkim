@@ -255,11 +255,21 @@ class DemoBackend:
         ]
         for i, it in enumerate(self.feed_items):
             it["created_at"] = f"{d(i)}T06:00:00+00:00"
-        # 연구·발표는 본인 확인이 필요하므로 자리표시자 1건만 둔다. 실제 목록을 주면 교체.
+        # 확인된 저서·발표. 추가 논문·발표는 운영자가 알려주면 채운다.
         self.publications_ = [
-            dict(id=1, year=2025, type="talk", title="(입력 대기) 발표·논문 제목", authors="김성훈 외",
-                 venue="학술대회/학술지", doi=None, url=None, pdf_url=None, is_featured=False,
-                 note="실제 발표·논문 목록을 알려주시면 이 표를 채웁니다."),
+            dict(id=1, year=2025, type="report", title="AI와 물 관리 (인공지능총서)", authors="김성훈",
+                 venue="커뮤니케이션북스 · ISBN 9791173079757",
+                 doi=None, url="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=362635863",
+                 pdf_url=None, is_featured=True,
+                 note="기후위기 대응을 위한 AI 기반 수자원 관측·예측·관리 전문서."),
+            dict(id=2, year=2024, type="talk",
+                 title="제2회 한국수자원학회 AI응용연구분과위원회 세미나 총괄 (디지털트윈 AI 하천/유역 고도화)",
+                 authors="김성훈(분과위원장) 외", venue="한국수자원학회 AI응용연구분과위원회",
+                 doi=None, url=None, pdf_url=None, is_featured=False, note=None),
+            dict(id=3, year=2023, type="talk",
+                 title="데이터와 수치모델링, 연구인을 위한 AI 활용 — 제1회 AI 경진대회",
+                 authors="김성훈", venue="K-water연구원 AI연구센터",
+                 doi=None, url="https://github.com/Kwater-AILab", pdf_url=None, is_featured=False, note=None),
         ]
         # 미디어는 공개 기사로 채움(2026-10 검색). ★ 표시는 김성훈 소장 실명 등장 기사.
         self.media_ = [

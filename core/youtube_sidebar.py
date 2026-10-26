@@ -101,3 +101,16 @@ def render() -> None:
             for l in links:
                 if l.get("url") and l.get("label"):
                     st.markdown(f"- [{l['label']}]({l['url']})")
+
+        book = cfg.get("book") or {}
+        if book.get("title"):
+            st.divider()
+            st.markdown("###### 저서")
+            title = book["title"]
+            line = f"**[{title}]({book['url']})**" if book.get("url") else f"**{title}**"
+            st.markdown(line)
+            meta = " · ".join(str(x) for x in [book.get("author"), book.get("publisher"), book.get("year")] if x)
+            if meta:
+                st.caption(meta)
+            if book.get("isbn"):
+                st.caption(f"ISBN {book['isbn']}")

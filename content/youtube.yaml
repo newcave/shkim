@@ -19,3 +19,13 @@ links:
     url: "https://www.ctman.kr/29483"
   - label: "K-water AI Lab (GitHub)"
     url: "https://github.com/Kwater-AILab"
+
+# 사이드바 맨 아래 '저서' 블록.
+book:
+  title: "AI와 물 관리"
+  series: "인공지능총서"
+  author: "김성훈"
+  publisher: "커뮤니케이션북스"
+  year: 2025
+  isbn: "9791173079757"
+  url: "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=362635863"

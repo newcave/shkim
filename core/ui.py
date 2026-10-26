@@ -24,11 +24,17 @@ _STYLE = """
   --wash: #f4f8f9;       /* 아주 옅은 바탕 */
 }
 
-.stApp, .stApp * {
+.stApp, .stApp p, .stApp span, .stApp div, .stApp a, .stApp li,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+.stApp button, .stApp input, .stApp textarea, .stApp label, .stApp caption, .stApp td, .stApp th {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
                "Noto Sans KR", "Segoe UI", sans-serif;
 }
 .stApp code, .stApp pre, .stApp kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.material-symbols-outlined, .material-symbols-rounded, span[data-testid="stIconMaterial"],
+[class*="material-symbols"], .stApp [data-testid="stIconMaterial"] {
+  font-family: "Material Symbols Outlined", "Material Symbols Rounded" !important;
+}
 .block-container { max-width: 1060px; padding-top: 2rem; }
 h1, h2, h3 { letter-spacing: -0.015em; color: var(--ink); }
 a { color: var(--water); }

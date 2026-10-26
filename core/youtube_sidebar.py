@@ -26,8 +26,8 @@ _YT_ID = re.compile(r"(?:v=|youtu\.be/|/shorts/|/embed/)([\w-]{11})")
 FEED = "https://www.youtube.com/feeds/videos.xml"
 
 
-@st.cache_data(show_spinner=False)
 def _config() -> dict:
+    # 캐시하지 않는다 — youtube.yaml이 바뀌면 즉시 반영되도록.
     if not CONFIG_PATH.exists():
         return {}
     with CONFIG_PATH.open(encoding="utf-8") as f:

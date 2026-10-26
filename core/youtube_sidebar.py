@@ -94,3 +94,10 @@ def render() -> None:
 
         if cfg.get("channel_url"):
             st.markdown(f"[유튜브 채널 보기 →]({cfg['channel_url']})")
+
+        links = cfg.get("links") or []
+        if links:
+            st.markdown("###### 주요 자료")
+            for l in links:
+                if l.get("url") and l.get("label"):
+                    st.markdown(f"- [{l['label']}]({l['url']})")

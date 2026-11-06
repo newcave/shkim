@@ -1,4 +1,5 @@
-"""수집기용 Supabase 접근. 환경변수 SUPABASE_URL, SUPABASE_SERVICE_KEY를 쓴다."""
+"""수집기용 Supabase 접근. 환경변수 SUPABASE_URL, SUPABASE_SERVICE_KEY(, SUPABASE_SCHEMA)를 쓴다.
+SUPABASE_SCHEMA를 비우면 public(supabase.com 프로젝트 그대로). 연구소 서버는 shkim (supabase/institute/README.md)."""
 from __future__ import annotations
 
 import os
@@ -9,18 +10,30 @@ def _chunks(seq, n):
         yield seq[i:i + n]
 
 
-class Store:
-    def __init__(self, url: str, key: str):
-        from supabase import create_client
+def make_client(url: str, key: str, schema: str | None = None):
+    """schema가 public이 아니면 PostgREST에 그 스키마로 묻는다 (Accept-/Content-Profile 머리글)."""
+    from supabase import create_client
 
-        self.c = create_client(url, key)
+    schema = (schema or "").strip() or "public"
+    if schema == "public":
+        return create_client(url, key)
+    try:
+        from supabase import ClientOptions
+    except ImportError:  # 오래된 supabase-py
+        from supabase.lib.client_options import ClientOptions
+    return create_client(url, key, options=ClientOptions(schema=schema))
+
+
+class Store:
+    def __init__(self, url: str, key: str, schema: str | None = None):
+        self.c = make_client(url, key, schema)
 
     @classmethod
     def from_env(cls) -> "Store":
         url, key = os.environ.get("SUPABASE_URL"), os.environ.get("SUPABASE_SERVICE_KEY")
         if not url or not key:
             raise SystemExit("SUPABASE_URL, SUPABASE_SERVICE_KEY 환경변수가 필요합니다.")
-        return cls(url, key)
+        return cls(url, key, os.environ.get("SUPABASE_SCHEMA"))
 
     def active_sources(self) -> list[dict]:
         return self.c.table("sources").select("*").eq("active", True).order("id").execute().data

@@ -1,0 +1,7 @@
+# (대안) nginx를 고치지 않으려면 — WCS 문(Caddy, WCS_search/gate/Caddyfile)의 ':{$GATE_PORT:8512} {' 안,
+# 맨 아래 'handle {' (그 밖 → 연구자료 검색)보다 위에 넣는다. 로그인 확인(import login)은 붙이지 않는다 — 열쇠 확인은 PostgREST가 한다.
+	@shkimdb path /shkim-db/rest/v1/*
+	handle @shkimdb {
+		uri strip_prefix /shkim-db/rest/v1
+		reverse_proxy 127.0.0.1:3101
+	}

@@ -3,6 +3,7 @@
 앱은 이 모듈의 함수만 호출한다. 뒤에서는 Supabase(운영) 또는 메모리 샘플 데이터(데모)가 동작한다.
 - DEMO_MODE = true 이거나 SUPABASE_URL/KEY가 없으면 데모 백엔드.
 - Supabase에는 서버 측에서 service_role 키로 접근한다(브라우저에 노출되지 않음). RLS는 anon 전면 차단.
+- SUPABASE_SCHEMA(선택, 기본 public): 연구소 서버처럼 전용 스키마(shkim)에 표가 있으면 그 이름.
 """
 from __future__ import annotations
 
@@ -34,10 +35,10 @@ def _clean_query(q: str) -> str:
 class SupabaseBackend:
     demo = False
 
-    def __init__(self, url: str, key: str):
-        from supabase import create_client
+    def __init__(self, url: str, key: str, schema: str | None = None):
+        from collector.store import make_client
 
-        self.c = create_client(url, key)
+        self.c = make_client(url, key, schema)
 
     # 피드
     def feed(self, q=None, kinds=None, lang=None, days=None, tags=None,
@@ -432,7 +433,7 @@ def _backend():
     url, key = secret("SUPABASE_URL"), secret("SUPABASE_SERVICE_KEY")
     if secret("DEMO_MODE") or not (url and key):
         return DemoBackend()
-    return SupabaseBackend(str(url), str(key))
+    return SupabaseBackend(str(url), str(key), str(secret("SUPABASE_SCHEMA") or ""))
 
 
 def is_demo() -> bool:

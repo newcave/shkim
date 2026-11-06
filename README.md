@@ -32,6 +32,12 @@ streamlit run app.py
 
 무료 플랜은 일주일간 DB 활동이 없으면 일시정지된다. 수집기가 매일 DB에 쓰기 때문에 정상 운영 중에는 멈추지 않는다.
 
+### 2-B. 연구소 서버의 Supabase를 쓸 때
+
+supabase.com 프로젝트 대신 연구소 서버에 이미 있는 Supabase에 전용 스키마 `shkim`을 두는 방법은
+[`supabase/institute/README.md`](supabase/institute/README.md) (관리자 요청 절차·SQL·전용 계정·nginx 설정·되돌리기).
+코드는 같고, 설정만 하나 더 넣는다: `SUPABASE_SCHEMA = "shkim"` (비우면 `public` = supabase.com 프로젝트 그대로).
+
 ## 3. 배포 (Streamlit Community Cloud)
 
 1. 이 폴더를 GitHub 레포로 올린다. 레포는 **비공개**로 두어도 된다.
@@ -56,7 +62,8 @@ streamlit run app.py
 
 | 종류 | 이름 | 설명 |
 |---|---|---|
-| Secret | `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` | 필수 |
+| Secret | `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` | 필수. 아직 없으면 수집을 건너뛰고 경고만 남긴다 |
+| Variable | `SUPABASE_SCHEMA` | 연구소 서버면 `shkim` (2-B). supabase.com 프로젝트면 비워 둔다 |
 | Secret | `OPENALEX_EMAIL` | 선택. OpenAlex polite pool(더 빠른 응답) |
 | Secret | `ANTHROPIC_API_KEY` | 선택. 신규 항목 한글 요약 |
 | Variable | `SUMMARIZE` | `1`이면 요약 실행 (기본 0). 한 번에 40건까지 |
@@ -65,7 +72,7 @@ Actions 탭 → `collect` → Run workflow로 첫 수집을 돌린다. 이후 �
 수집 소스와 검색식은 앱의 관리 페이지(수집 소스 탭)에서 바꾼다. YouTube 소스는 채널 ID를 넣고 켠다
 (채널 페이지 소스 보기에서 `"channelId"` 검색).
 
-로컬 실행: `pip install -r requirements-collector.txt && SUPABASE_URL=… SUPABASE_SERVICE_KEY=… python -m collector.collect`
+로컬 실행: `pip install -r requirements-collector.txt && SUPABASE_URL=… SUPABASE_SERVICE_KEY=… [SUPABASE_SCHEMA=shkim] python -m collector.collect`
 
 ## 6. kwater-harvest 결과 반영
 
@@ -97,6 +104,7 @@ collector/sources/     openalex arxiv gnews rss youtube
 collector/config.py    태그 규칙 (키워드 → 태그)
 scripts/import_harvest.py  _INDEX.md 파서 (관리 페이지와 공용)
 supabase/schema.sql    테이블·인덱스·RLS·초기 소스
+supabase/institute/    연구소 서버 Supabase용 (전용 스키마·계정·PostgREST·nginx, 관리자 요청 절차)
 content/profile.yaml   홈 프로필·학력·경력 (이 파일만 고치면 반영)
 content/youtube.yaml   사이드바 유튜브 설정
 .github/workflows/collect.yml  매일 수집
